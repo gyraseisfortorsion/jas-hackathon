@@ -1,0 +1,17 @@
+credentials:
+  usernames:
+    askar:
+      email: askarali.talkybek@gmail.com
+      name: Askarali Talkybek
+      password: $2b$12$q2fv0cmnI8jWnRFWZOE6euscsg/OVywnMkVVszVBFmKtkeJeoXRhy
+    rakhat:
+      email: rakhat.ospanov@nu.edu.kz
+      name: Rakhat GaySex
+      password: $2b$12$DbZT2fML/JXXOeO9Gme1z.zLa7n1C/KJqC.geEUlA9ffPAu79tXT2
+cookie:
+  expiry_days: 30
+  key: abcd
+  name: cookie
+preauthorized:
+  emails:
+  - shakhnazar.zhumabekov@nu.edu.kz
