@@ -23,7 +23,7 @@ with col1:
     with st.container():
         col3,col4 = st.columns(2)
         with col3:
-            st.image("https://pbs.twimg.com/profile_images/1544722618275827713/9-aMN_Wb_400x400.jpg%22)
+            st.image("https://pbs.twimg.com/profile_images/1544722618275827713/9-aMN_Wb_400x400.jpg")
         with col4:
             data = np.random.randn(20,1)
             st.bar_chart(data)
