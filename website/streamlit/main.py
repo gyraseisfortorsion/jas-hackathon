@@ -9,17 +9,21 @@ import base64
 
 
 #link rel css stylesheet
+
 with open('style.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
+
+
+
 col1,col2= st.columns([2,1])
 
-col1.subheader("Video")
+
 with col1:
     with st.container():
         col3,col4 = st.columns(2)
         with col3:
-            st.image("https://pbs.twimg.com/profile_images/1544722618275827713/9-aMN_Wb_400x400.jpg")
+            st.image("https://pbs.twimg.com/profile_images/1544722618275827713/9-aMN_Wb_400x400.jpg%22)
         with col4:
             data = np.random.randn(20,1)
             st.bar_chart(data)
@@ -27,8 +31,16 @@ with col1:
     df = pd.DataFrame(
     np.random.randn(10, 5),
     columns=('col %d' % i for i in range(5)))
-    st.table(df)
-col2.subheader("chart")
+    #st.table(df)
+    ndata = np.random.randn(100,10)
+    ndata = abs(ndata)
+    st.bar_chart(ndata)
+
+
+
+with col2:
+    with st.container():
+        st.subheader("Hello")
 
 #############
 
