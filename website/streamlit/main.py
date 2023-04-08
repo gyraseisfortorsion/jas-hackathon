@@ -8,26 +8,30 @@ from prophet.plot import plot_cross_validation_metric
 import base64
 
 
-# Hide footer
-hide_streamlit_style = """
-<style>
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    footer {
-        visibility: hidden;
-    }
-    footer:after {
-        content:''; 
-        visibility: visible;
-        display: block;
-        position: relative;
-        #background-color: red;
-        padding: 5px;
-        top: 2px;
-    }
-</style>
-"""
-st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
+#link rel css stylesheet
+with open('style.css') as f:
+    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+col1,col2= st.columns([2,1])
+
+col1.subheader("Video")
+with col1:
+    with st.container():
+        col3,col4 = st.columns(2)
+        with col3:
+            st.image("https://pbs.twimg.com/profile_images/1544722618275827713/9-aMN_Wb_400x400.jpg")
+        with col4:
+            data = np.random.randn(20,1)
+            st.bar_chart(data)
+
+    df = pd.DataFrame(
+    np.random.randn(10, 5),
+    columns=('col %d' % i for i in range(5)))
+    st.table(df)
+col2.subheader("chart")
+
+#############
+
 
 # add sidebar menu
 st.sidebar.title('📈 Прогнозирование активности')

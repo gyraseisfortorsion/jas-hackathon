@@ -1,0 +1,75 @@
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+footer {
+
+    visibility: hidden;
+
+    }
+footer:after {
+    content:''; 
+    visibility: hidden;
+    display: block;
+    position: relative;
+    background-color: red;
+    padding: 5px;
+    top: 2px;
+}
+ .marks{
+    margin-right: -300px;
+    position: absolute;
+    z-index:1;
+ }
+.block-container{
+    max-width:100vw !important;
+    width:80vw;
+}
+
+.css-1dp5vir{
+    visibility: hidden;
+    height: 0 !important;
+}
+
+header {
+    height: 0px !important;
+}
+.css-14xtw13{
+    display: none;
+    visibility: hidden;
+}
+.main{
+    height: 98vh!important;
+}
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+footer {
+
+    visibility: hidden;
+
+    }
+footer:after {
+    content:''; 
+    visibility: hidden;
+    display: block;
+    position: relative;
+    background-color: red;
+    padding: 5px;
+    top: 2px;
+}
+ .marks{
+    margin-right: -300px;
+    position: absolute;
+    z-index:1;
+ }
+.block-container{
+    max-width:100vw !important;
+    width:80vw;
+}
+
+.css-1dp5vir{
+    visibility: hidden;
+    height: 0 !important;
+}
+
+header {
+    height: 0px !important;
+}
