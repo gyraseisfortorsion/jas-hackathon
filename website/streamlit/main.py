@@ -1,101 +1,12 @@
 import streamlit as st
-import numpy as np
 import pandas as pd
-import altair as alt
-from vega_datasets import data
+import numpy as np
+from prophet import Prophet
+from prophet.diagnostics import performance_metrics
+from prophet.diagnostics import cross_validation
+from prophet.plot import plot_cross_validation_metric
+import base64
 
-
-st.backround_color = 'white'
-st.set_page_config(
-    page_title="Time series annotations", page_icon="⬇", layout="centered"
-)
-
-
-@st.experimental_memo
-def get_data():
-    source = data.stocks()
-    source = source[source.date.gt("2004-01-01")]
-    return source
-
-
-@st.experimental_memo(ttl=60 * 60 * 24)
-def get_chart(data):
-    hover = alt.selection_single(
-        fields=["date"],
-        nearest=True,
-        on="mouseover",
-        empty="none",
-    )
-
-    lines = (
-        alt.Chart(data, height=500, title="Evolution of stock prices")
-        .mark_line()
-        .encode(
-            x=alt.X("date", title="Date"),
-            y=alt.Y("price", title="Price"),
-            color="symbol",
-        )
-    )
-
-    # Draw points on the line, and highlight based on selection
-    points = lines.transform_filter(hover).mark_circle(size=65)
-
-    # Draw a rule at the location of the selection
-    tooltips = (
-        alt.Chart(data)
-        .mark_rule()
-        .encode(
-            x="yearmonthdate(date)",
-            y="price",
-            opacity=alt.condition(hover, alt.value(0.3), alt.value(0)),
-            tooltip=[
-                alt.Tooltip("date", title="Date & Time"),
-                alt.Tooltip("price", title="Number of customers in a sector"),
-            ],
-        )
-        .add_selection(hover)
-    )
-
-    return (lines + points + tooltips).interactive()
-
-
-st.title("⬇ Time series annotations")
-
-
-col1, col2 = st.columns(2)
-ticker = "💬"
-ticker_dx = 0
-ticker_dy = -10
-
-# Original time series chart. Omitted `get_chart` for clarity
-source = get_data()
-chart = get_chart(source)
-
-# Input annotations
-ANNOTATIONS = [
-    ("Mar 01, 2008", "Pretty good day for GOOG"),
-    ("Dec 01, 2007", "Something's going wrong for GOOG & AAPL"),
-    ("Nov 01, 2008", "Market starts again thanks to..."),
-    ("Dec 01, 2009", "Small crash for GOOG after..."),
-]
-
-# Create a chart with annotations
-annotations_df = pd.DataFrame(ANNOTATIONS, columns=["date", "event"])
-annotations_df.date = pd.to_datetime(annotations_df.date)
-annotations_df["y"] = 0
-annotation_layer = (
-    alt.Chart(annotations_df)
-    .mark_text(size=15, text=ticker, dx=ticker_dx, dy=ticker_dy, align="center")
-    .encode(
-        x="date:T",
-        y=alt.Y("y:Q"),
-        tooltip=["event"],
-    )
-    .interactive()
-)
-
-# Display both charts together
-st.altair_chart((chart + annotation_layer).interactive(), use_container_width=True)
 
 # Hide footer
 hide_streamlit_style = """
@@ -117,3 +28,79 @@ hide_streamlit_style = """
 </style>
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
+
+# add sidebar menu
+st.sidebar.title('📈 Прогнозирование активности')
+
+st.title('📈 Cистема прогнозирования покупательской активности')
+
+"""
+### Инструкция по использованию
+В данной вкладке вы можете видеть предсказывать временные ряды покупок за каждый блок и скачать его в формате 'csv'. Для этого выберите горизонт предсказания. Имейте ввиду что точность прогноза уменьшается с увеличением горизонта прогноза. Также вы можете выбрать сектор, для которого хотите построить прогноз. После нажмите на кнопку 'Прогнозировать'.
+"""
+
+periods_input = st.number_input(
+    'Горизонт предсказания (в днях)',
+    min_value = 1, max_value = 365
+)
+
+# select sector
+sector = st.selectbox(
+    'Выберите сектор',
+    ('Сектор 1', 'Сектор 2', 'Сектор 3', 'Сектор 4', 'Сектор 5', 'Сектор 6',)
+)
+sector_number = sector.split(' ')[1]
+
+if sector:
+    data = pd.read_csv(f'data/sector{sector_number}.csv')
+    data['ds'] = pd.to_datetime(data['ds'],errors='coerce')
+
+    # rename columns
+    data_presentation = data.rename(columns={'ds': 'Дата', 'y': 'Количество людей'})
+    st.dataframe(data_presentation, use_container_width=True)
+
+    max_date = data['ds'].max()
+
+    if st.button('Прогнозировать'):
+
+        m = Prophet()
+        m.fit(data)
+
+        """
+        ### Визуализация прогноза
+        Графики ниже показывают прогнозируемые значения. "yhat" - это прогнозируемое значение, а верхняя и нижняя границы - это (по умолчанию) доверительные интервалы в 80%.
+        """
+
+        future = m.make_future_dataframe(periods=periods_input)
+        
+        forecast = m.predict(future)
+        fcst = forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']]
+
+        fcst_filtered =  fcst[fcst['ds'] > max_date]
+        fcst_filtered = fcst_filtered.rename(columns={
+            'ds': 'Дата', 'yhat': 'Количество людей', 'yhat_lower': 'Нижняя граница', 'yhat_upper': 'Верхняя граница'
+        })
+        st.dataframe(fcst_filtered, use_container_width=True)
+        
+        """
+        Следующая визуализация показывает прогнозируемые значения (синие точки) и истинные значения (черные точки).
+        """
+        fig1 = m.plot(forecast)
+        st.write(fig1)
+
+        """
+        Следующие несколько визуализаций показывают тенденции прогнозируемых значений, тенденции дня недели и годовые тенденции (если набор данных содержит несколько лет). Синяя затененная область представляет верхние и нижние доверительные интервалы.
+        """
+        fig2 = m.plot_components(forecast)
+        st.write(fig2)
+
+
+        """
+        ### Скачать прогноз
+        По ссылке ниже вы можете скачать прогноз в формате 'csv'. После скачивания файла, вы можете открыть его в Excel и проанализировать.
+        """
+        csv_exp = fcst_filtered.to_csv(index=False)
+        # When no file name is given, pandas returns the CSV as a string, nice.
+        b64 = base64.b64encode(csv_exp.encode()).decode()  # some strings <-> bytes conversions necessary here
+        href = f'<a href="data:file/csv;base64,{b64}">Download CSV File</a>'
+        st.markdown(href, unsafe_allow_html=True)
