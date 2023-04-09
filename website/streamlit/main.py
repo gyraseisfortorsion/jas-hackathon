@@ -111,7 +111,16 @@ elif authentication_status:
         with st.container():
             col3,col4 = st.columns(2)
             with col3:
-                st.image("https://pbs.twimg.com/profile_images/1544722618275827713/9-aMN_Wb_400x400.jpg")
+                # st.image("https://pbs.twimg.com/profile_images/1544722618275827713/9-aMN_Wb_400x400.jpg")
+                video_html = """
+                    <video controls width="250" autoplay="true" muted="true" loop="true">
+                    <source 
+                    src="/Users/askarali/jas-hackathon/website/streamlit/cam.mp4" 
+                    
+                    type="video/mp4" />
+                    </video>
+                """
+                col3.markdown(video_html, unsafe_allow_html=True)
             with col4:
                 data = np.random.randn(20,1)
                 st.bar_chart(data)
