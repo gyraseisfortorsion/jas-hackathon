@@ -113,11 +113,8 @@ elif authentication_status:
             with col3:
                 # st.image("https://pbs.twimg.com/profile_images/1544722618275827713/9-aMN_Wb_400x400.jpg")
                 video_html = """
-                    <video controls width="400" autoplay="true" muted="true" loop="true">
-                    <source 
-                    src="https://rr1---sn-4g5lznes.c.drive.google.com/videoplayback?expire=1681028068&ei=pDsyZO6NHYG32bQPzfyMkA4&ip=46.34.195.165&cp=QVRNU0FfV1BUSVhPOktlNm8yRGxnQXRucnFSZVhndHlxSV9fdXZZbEJ6RGlCZU41M3JaREktb0c&id=dd217ad60c3549cb&itag=22&source=webdrive&requiressl=yes&ttl=transient&susc=dr&driveid=1EiD7UCM2La2etEva7fF8uSNAivfZ6DjA&app=explorer&mime=video/mp4&vprv=1&prv=1&dur=98.057&lmt=1681013456825370&subapp=DRIVE_WEB_FILE_VIEWER&txp=0016224&sparams=expire,ei,ip,cp,id,itag,source,requiressl,ttl,susc,driveid,app,mime,vprv,prv,dur,lmt&sig=AOq0QJ8wRQIhANrap2gdtR_ZQh_MjrB81A20IHQeGDlqnI9a--B5GCTQAiA8msng-4XAQPxnY0_CFGBcZ1prAqcsBU2F1Arp-v1mJw==&cpn=3bphibs5Ahtj32-J&c=WEB_EMBEDDED_PLAYER&cver=1.20230402.00.00&redirect_counter=1&cm2rm=sn-f5fe676&req_id=fcb7ed75c16e36e2&cms_redirect=yes&cmsv=e&mh=RG&mm=34&mn=sn-4g5lznes&ms=ltu&mt=1681013329&mv=m&mvi=1&pl=24&lsparams=mh,mm,mn,ms,mv,mvi,pl&lsig=AG3C_xAwRQIgOKpIi_BRUueO6ZnCFx6q26w7hR1QoRZODicQTTW0rJcCIQCbJrgqMUuda1hFnLrDGv7RgXaRC27_0lsKjEV-7yfqTg==" 
-                    type="video/mp4" />
-                    </video>
+                    <iframe src="https://drive.google.com/file/d/1EiD7UCM2La2etEva7fF8uSNAivfZ6DjA/preview" width="320" height="240" allow="autoplay"></iframe>
+                    
                 """
                 col3.markdown(video_html, unsafe_allow_html=True)
             with col4:
