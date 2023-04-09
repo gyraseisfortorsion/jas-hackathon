@@ -1,10 +1,7 @@
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden;}
+/* #MainMenu {visibility: hidden;} */
 footer {
-
     visibility: hidden;
-
-    }
+}
 footer:after {
     content:''; 
     visibility: hidden;

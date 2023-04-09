@@ -101,36 +101,58 @@ elif authentication_status:
     
     st.sidebar.title(f"Welcome {name}")
     #link rel css stylesheet
-    col1,col2= st.columns([2,1])
+    col1, col2= st.columns([2,1])
 
 
-    col1,col2= st.columns([2,1], gap="medium")
+    col1, col2= st.columns([2,1], gap="medium")
 
 
     with col1:
         with st.container():
             col3,col4 = st.columns(2)
             with col3:
+                st.subheader("Stream")
                 # st.image("https://pbs.twimg.com/profile_images/1544722618275827713/9-aMN_Wb_400x400.jpg")
-                video_html = """
-                    <iframe src="https://drive.google.com/file/d/1EiD7UCM2La2etEva7fF8uSNAivfZ6DjA/preview" width="320" height="240" allow="autoplay"></iframe>
-                    
+                video_html = """     
+                <iframe src="https://drive.google.com/file/d/1EiD7UCM2La2etEva7fF8uSNAivfZ6DjA/preview" width="320" height="240" allow="autoplay"></iframe>
                 """
                 col3.markdown(video_html, unsafe_allow_html=True)
             with col4:
+                st.subheader("Number of clients")
                 data = np.random.randn(20,1)
-                st.bar_chart(data)
+                
+                st.bar_chart(abs(data))
+        st.subheader("Current number of products")
 
+        # dataframe of number of products in market
         df = pd.DataFrame(
-        np.random.randn(10, 5),
-        columns=('col %d' % i for i in range(5)))
-        #st.table(df)
-        ndata = np.random.randn(100,10)
-        ndata = abs(ndata)
-        st.bar_chart(ndata)
-
+            np.random.randn(20, 5) * 20 + 100,
+            columns=['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry'])
+        st.bar_chart(df)
 
 
     with col2:
         with st.container():
-            st.markdown("#      Recommendations")
+            # analyze the data and provide some sugggest some useful insights
+            st.subheader("Recommendations")
+            if df['Apple'].mean() > 100:
+                st.write("Apple is doing well")
+            else:
+                st.write("Apple is not doing well. Need to refill")
+            if df['Banana'].mean() > 100:
+                st.write("Banana is doing well")
+            else:
+                st.write("Banana is not doing well. Need to refill")
+            if df['Cherry'].mean() > 100:
+                st.write("Cherry is doing well")
+            else:
+                st.write("Cherry is not doing well. Need to refill")
+            if df['Date'].mean() > 100:
+                st.write("Date is doing well")
+            else:
+                st.write("Date is not doing well. Need to refill")
+            if df['Elderberry'].mean() > 100:
+                st.write("Elderberry is doing well")
+            else:
+                st.write("Elderberry is not doing well. Need to refill")
+

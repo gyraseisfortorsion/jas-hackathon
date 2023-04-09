@@ -5,6 +5,7 @@ from prophet import Prophet
 from prophet.diagnostics import performance_metrics
 from prophet.diagnostics import cross_validation
 from prophet.plot import plot_cross_validation_metric
+import base64
 
 st.set_page_config(page_title="Prediction", page_icon=None, layout="wide", initial_sidebar_state="collapsed", menu_items=None)
 with open('style.css') as f:
