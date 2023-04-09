@@ -1,0 +1,5 @@
+https://www.kaggle.com/datasets/msambare/fer2013
+
+https://universe.roboflow.com/polyu-9ziss/retail-object-detection-bqtzf/dataset/2
+
+https://github.com/quental96/merl-shopping/blob/master/ORIGINAL.md
