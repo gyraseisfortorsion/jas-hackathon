@@ -3,12 +3,12 @@
         "page_script_hash": "23cf24abf6ea2714130f8b0ec8a929ef",
         "page_name": "Main",
         "icon": "",
-        "script_path": "/Users/askarali/jas-hackathon/website/streamlit/Main.py"
+        "script_path": "Main.py"
     },
     "36b23c6b9523dbd21dad84d4e71f9dcf": {
         "page_script_hash": "36b23c6b9523dbd21dad84d4e71f9dcf",
         "page_name": "Prediction",
         "icon": "",
-        "script_path": "/Users/askarali/jas-hackathon/website/streamlit/pages/Prediction.py"
+        "script_path": "./pages/Prediction.py"
     }
 }
