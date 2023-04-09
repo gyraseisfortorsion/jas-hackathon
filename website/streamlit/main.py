@@ -115,7 +115,7 @@ elif authentication_status:
                 video_html = """
                     <video controls width="250" autoplay="true" muted="true" loop="true">
                     <source 
-                    src="/Users/askarali/jas-hackathon/website/streamlit/cam.mp4" 
+                    src="https://drive.google.com/file/d/1EiD7UCM2La2etEva7fF8uSNAivfZ6DjA/view?usp=share_link" 
                     
                     type="video/mp4" />
                     </video>
