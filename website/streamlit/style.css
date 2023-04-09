@@ -36,7 +36,14 @@ th.row_heading{
     width:148px;
 }
 
-.css-1r6slb0{
+.css-tcjedx{
     box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
     0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    background: rgba(255,255,255,1);
+}
+
+h1{
+    padding: 0;
+    text-align: center;
+    justify-content: center;;
 }

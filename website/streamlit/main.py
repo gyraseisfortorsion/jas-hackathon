@@ -104,6 +104,9 @@ elif authentication_status:
     col1,col2= st.columns([2,1])
 
 
+    col1,col2= st.columns([2,1], gap="medium")
+
+
     with col1:
         with st.container():
             col3,col4 = st.columns(2)
@@ -121,6 +124,8 @@ elif authentication_status:
         ndata = abs(ndata)
         st.bar_chart(ndata)
 
+
+
     with col2:
         with st.container():
-            st.subheader("Hello")        
+            st.markdown("#      Recommendations")

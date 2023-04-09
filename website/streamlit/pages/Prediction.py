@@ -7,7 +7,9 @@ from prophet.diagnostics import cross_validation
 from prophet.plot import plot_cross_validation_metric
 
 st.set_page_config(page_title="Prediction", page_icon=None, layout="wide", initial_sidebar_state="collapsed", menu_items=None)
-
+with open('style.css') as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+        
 st.title('📈 Cистема прогнозирования покупательской активности')
 st.sidebar.title('📈 Прогнозирование активности')
 """
