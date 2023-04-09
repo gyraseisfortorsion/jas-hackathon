@@ -113,12 +113,7 @@ elif authentication_status:
             with col3:
                 # st.image("https://pbs.twimg.com/profile_images/1544722618275827713/9-aMN_Wb_400x400.jpg")
                 video_html = """
-                    <video controls width="250" autoplay="true" muted="true" loop="true">
-                    <source 
-                    src="https://drive.google.com/file/d/1EiD7UCM2La2etEva7fF8uSNAivfZ6DjA/view?usp=share_link" 
-                    
-                    type="video/mp4" />
-                    </video>
+                    <iframe src="https://drive.google.com/file/d/1EiD7UCM2La2etEva7fF8uSNAivfZ6DjA/preview" width="640" height="480" allow="autoplay", allow="loop"></iframe>
                 """
                 col3.markdown(video_html, unsafe_allow_html=True)
             with col4:
