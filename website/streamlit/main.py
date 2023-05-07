@@ -185,8 +185,8 @@ elif authentication_status:
                 # col3.markdown(video_html, unsafe_allow_html=True)
                 startAnalysis = st.button("Analyze")
                 if startAnalysis:
-                    thread = threading.Thread(target=test.people_counter)
-                    add_script_run_ctx(thread)
+                    thread = threading.Thread(target=test.people_counter())
+                    #add_script_run_ctx(thread)
                     thread.start()
                 
             with col4:
